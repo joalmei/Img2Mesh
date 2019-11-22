@@ -20,7 +20,7 @@ def fetchData (path):
 
     return X, Y
 
-def prepareData (path = './data/content/objnet/airplane/test'):
+def prepareData (path):
     X, Y = fetchData(path)
     for i in range(len(X)):
         for j in range(len(X[i])):
