@@ -20,12 +20,13 @@ def fetchData (path):
 
     return X, Y
 
-X, Y = fetchData('./data/content/objnet/airplane/test')
-
-for i in range(len(X)):
-    for j in range(len(X[i])):
-        idx = X[i][j] > 0
-        X[i][j][idx] = 1
+def prepareData (path = './data/content/objnet/airplane/test'):
+    X, Y = fetchData(path)
+    for i in range(len(X)):
+        for j in range(len(X[i])):
+            idx = X[i][j] > 0
+            X[i][j][idx] = 1
+    return X, Y
 
 # use PCA in X to reduce dimmensionality
 #pca = PCA(0.99)
