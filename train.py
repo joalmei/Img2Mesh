@@ -14,4 +14,4 @@ def testTrain(path = './data/content/objnet/airplane/test'):
 
     X, Y = prepareData(path)
     X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
-    return X
+    return net, optim, X, Y
