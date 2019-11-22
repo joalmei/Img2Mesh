@@ -3,22 +3,22 @@ from tensorflow import keras
 import tensorflow.keras.backend as K
 
 def chamfer_loss(ref, targ):
-    nr = int(ref.shape[0] / 3)
+    nr = ref.shape[0]
     nt = int(targ.shape[0] / 3)
-    
-    ref = tf.reshape(ref, (nr, 3))
+
+    #ref = tf.reshape(ref, (nr, 3))
     targ = tf.reshape(targ, (nt, 3))
-    
+
     r = tf.tile(ref, [nt, 1])
-    r = tf.reshape(r, (nt, nr, 3))
-    
+    r = tf.reshape(r, [nt, nr, 3])
+
     t = tf.tile(targ, [1, nr])
     t = tf.reshape(t, [nt, nr, 3])
 
     dist = K.sum(K.square(r - t), axis=2)
 
-    #closeTarg = K.argmin(dist, axis=0)
-    return K.mean(K.min(dist, axis=0))
+    #closeTarg = K.argmin(dist, axis=1)
+    return K.mean(K.min(dist, axis=1))
 
 class Optimizer:
     def __init__ (self, model, learning_rate=0.001):
