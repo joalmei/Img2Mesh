@@ -16,7 +16,7 @@ def fetchData (path):
             data['front'],  data['back'],
             data['left'],   data['right']])
 
-        Y.append(data['vertices'])
+        Y.append(np.array(data['vertices'], dtype='float32'))
 
     return X, Y
 
