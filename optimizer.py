@@ -58,13 +58,14 @@ class Optimizer:
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
 
+            if (epoch % 50 == 0):
+                print("-> epoch : ", epoch, " ; loss = ", loss_value)
+            
             if (epoch % 200 == 0):
                 if (epoch > 1 and
                     (train_loss_results[-200] - loss_value < minStep) or
                     loss_value < minError):
                     return train_loss_results, True
-            elif (epoch % 600 == 0):
-                print("-> epoch : ", epoch, " ; loss = ", loss_value)
             
         return train_loss_results, False
     
