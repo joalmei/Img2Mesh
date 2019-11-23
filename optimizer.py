@@ -75,7 +75,7 @@ class Optimizer:
         while (not interrupt):
             print("========================================================================")
             loss, interrupt = self.train_epochs(X, Y, batches,
-                                                num_epochs=2000,
+                                                num_epochs=10,
                                                 minError=min_error,
                                                 minStep=min_step)
             losses.extend(loss)
