@@ -72,11 +72,12 @@ class Optimizer:
         while (not interrupt):
             loss, interrupt = self.train_epochs(X, Y, batches,
                                                 num_epochs=2000,
-                                                minError=minError,
+                                                minError=min_error,
                                                 minStep=min_step)
             losses.extend(loss)
             if (plot == True):
                 plt.plot(losses)
+                plt.show()
         return losses
     
     def predict (self, X):
