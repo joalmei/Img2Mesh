@@ -28,13 +28,6 @@ def prepareData (path):
             X[i][j][idx] = 1
     return X, Y
 
-# use PCA in X to reduce dimmensionality
-#pca = PCA(0.99)
-#pca.fit(X)
-#pcaX = pca.transform(X)
-#print(pcaX.shape)
-
-
 #  {'vertices': verts, 'faces': faces,
 #   'top': top, 'bottom': bottom,
 #   'front': front, 'back': back,
