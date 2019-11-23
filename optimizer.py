@@ -2,6 +2,8 @@ import tensorflow as tf
 from tensorflow import keras
 import tensorflow.keras.backend as K
 
+import matplotlib.pyplot as plt
+
 def chamfer_loss(ref, targ):
     nr = ref.shape[0]
     nt = int(targ.shape[0] / 3)
@@ -64,7 +66,7 @@ class Optimizer:
             
         return train_loss_results, False
     
-    def train (self, X, Y, batches, minError=1e-3):
+    def train (self, X, Y, batches, minError=1e-3, plot=False):
         losses = []
         interrupt = False
         while (not interrupt):
@@ -73,6 +75,8 @@ class Optimizer:
                                                 minError=minError,
                                                 minStep=minError*minError)
             losses.extend(loss)
+            if (plot == True):
+                plt.plot(losses)
         return losses
     
     def predict (self, X):
