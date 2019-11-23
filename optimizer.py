@@ -61,11 +61,11 @@ class Optimizer:
             #if (epoch % 2 == 0):
             print("-> epoch : ", epoch, " ; loss = ", loss_value)
             
-            if (epoch % 5 == 0):
-                if (epoch > 1 and
-                    (train_loss_results[-200] - loss_value < minStep) or
-                    loss_value < minError):
-                    return train_loss_results, True
+            if (epoch % 5 == 0 and 
+                epoch > 1 and
+                (train_loss_results[-5] - loss_value < minStep) or
+                loss_value < minError):
+                return train_loss_results, True
             
         return train_loss_results, False
     
