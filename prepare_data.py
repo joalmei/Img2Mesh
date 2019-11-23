@@ -1,7 +1,6 @@
 import os
 import glob
 import numpy as np
-from sklearn.decomposition import PCA
 
 def fetchData (path):
     X = []
@@ -27,6 +26,18 @@ def prepareData (path):
             idx = X[i][j] > 0
             X[i][j][idx] = 1
     return X, Y
+
+def createBatches (length, batch_size=16):
+    batches = []
+
+    offset = 0
+    while offset < length - batch_size:
+        batches.append(slice(offset, offset+batch_size))
+        offset = offset + batch_size
+    
+    batches.append(slice(offset, None))
+
+    return batches
 
 #  {'vertices': verts, 'faces': faces,
 #   'top': top, 'bottom': bottom,
