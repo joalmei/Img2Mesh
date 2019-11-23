@@ -66,14 +66,14 @@ class Optimizer:
             
         return train_loss_results, False
     
-    def train (self, X, Y, batches, minError=1e-3, plot=False):
+    def train (self, X, Y, batches, min_error=1e-3, min_step=1e-3, plot=False):
         losses = []
         interrupt = False
         while (not interrupt):
             loss, interrupt = self.train_epochs(X, Y, batches,
                                                 num_epochs=2000,
                                                 minError=minError,
-                                                minStep=minError*minError)
+                                                minStep=min_step)
             losses.extend(loss)
             if (plot == True):
                 plt.plot(losses)
