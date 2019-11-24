@@ -10,21 +10,22 @@ import numpy      as np
 import time
 
 # ==============================================================================
-def prepareTrain(path = './data/content/objnet/airplane/test',
-                    model='classic',
-                    learning_rate=0.001,
-                    hidden_size=1024):
+def prepareTrainData(path = './data/content/objnet/airplane/test'):
 
+    X, Y = prepareData(path)
+    X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
+
+    return X, Y
+
+# ==============================================================================
+def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024):
     if (model == 'classic'):
         net = createNetwork(hidden_size, 50)
     else:
         net = createDeconvNetwork()
     optim = Optimizer(net, learning_rate=learning_rate)
 
-    X, Y = prepareData(path)
-    X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
-
-    return net, optim, X, Y
+    return net, optim
 
 # ==============================================================================
 def runTraining(optim, X, Y,
