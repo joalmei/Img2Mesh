@@ -56,9 +56,9 @@ class Optimizer:
             prevbatch = 0
             for batch in batches:
                 nbatch = nbatch + 1
-                if (int(10*nbatch/len(batches)) > prevbatch):
+                if (int(20*nbatch/len(batches)) > prevbatch):
                     prevbatch = int(10*nbatch/len(batches))
-                    print("batches: ", prevbatch)
+                    print("batches: ", prevbatch * 10, end=',')
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
@@ -68,6 +68,8 @@ class Optimizer:
 
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
+
+            print('')
 
             if (epoch % check_step == 0):
                 print("epoch : ", epoch,
