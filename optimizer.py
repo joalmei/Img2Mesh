@@ -57,7 +57,7 @@ class Optimizer:
             print("batches: ", end='')
             for batch in batches:
                 nbatch = nbatch + 1
-                if (int(20*nbatch/len(batches)) > prevbatch):
+                if (int(10*nbatch/len(batches)) > prevbatch):
                     prevbatch = int(10*nbatch/len(batches))
                     print(prevbatch * 10, end=', ')
                 # Optimize the model
