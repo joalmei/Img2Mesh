@@ -21,8 +21,8 @@ def createNetwork(hidden_size, out_vertices):
     model.add(layers.Conv3D(1024, (1,3,3)))
 
     model.add(layers.Flatten())
-    model.add(layers.Dense(hidden_size, activation='relu'))
-    model.add(layers.Dense(3 * out_vertices, activation='relu'))
+    model.add(layers.Dense(hidden_size, activation='relu', bias_initializer='ones'))
+    model.add(layers.Dense(3 * out_vertices, activation='relu', bias_initializer='ones'))
     model.add(layers.Reshape((out_vertices, 3)))
 
     return model
