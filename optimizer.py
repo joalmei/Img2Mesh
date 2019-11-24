@@ -70,7 +70,7 @@ class Optimizer:
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             
-            if (epoch % 5 == 0 and 
+            if (epoch % 1 == 0 and 
                 epoch > 1 and
                 (train_loss_results[-5] - loss_value < minStep) or
                 loss_value < minError):
