@@ -60,7 +60,7 @@ class Optimizer:
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
 
-            if (epoch % 2 == 0):
+            if (epoch % 1 == 0):
                 print("Saving... -> epoch : ", epoch, " ; loss = ", loss_value)
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
