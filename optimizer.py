@@ -42,7 +42,9 @@ class Optimizer:
             loss_value = self.loss(xs, ys)
         return loss_value, tape.gradient(loss_value, self.model.trainable_variables)
     
-    def train_epochs (self, X, Y, batches, num_epochs=2000, minError=1e-3, minStep=1e-9):
+    def train_epochs (self, X, Y, batches,
+                        num_epochs=2000, minError=1e-3, minStep=1e-9,
+                        checkpoint_callback=None):
         train_loss_results = []
         
         for epoch in range(num_epochs):
@@ -58,8 +60,10 @@ class Optimizer:
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
 
-            #if (epoch % 2 == 0):
-            print("-> epoch : ", epoch, " ; loss = ", loss_value)
+            if (epoch % 2 == 0):
+                print("Saving... -> epoch : ", epoch, " ; loss = ", loss_value)
+                if (checkpoint_callback != None):
+                    checkpoint_callback(self.model)
             
             if (epoch % 5 == 0 and 
                 epoch > 1 and
@@ -69,7 +73,9 @@ class Optimizer:
             
         return train_loss_results, False
     
-    def train (self, X, Y, batches, min_error=1e-3, min_step=1e-3, plot=False):
+    def train (self, X, Y, batches,
+                min_error=1e-3, min_step=1e-3, plot=False,
+                checkpoint_callback=None):
         losses = []
         interrupt = False
         while (not interrupt):
@@ -77,7 +83,8 @@ class Optimizer:
             loss, interrupt = self.train_epochs(X, Y, batches,
                                                 num_epochs=10,
                                                 minError=min_error,
-                                                minStep=min_step)
+                                                minStep=min_step,
+                                                checkpoint_callback=checkpoint_callback)
             losses.extend(loss)
             if (plot == True):
                 plt.plot(loss)
