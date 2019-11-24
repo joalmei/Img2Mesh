@@ -31,7 +31,7 @@ def runTrainning(optim, X, Y,
     batches = createBatches(len(X), batch_size=batch_size)
     losses = optim.train(X, Y, batches,
                         min_error=min_error, min_step=min_step, plot=True,
-                        checkpoint_callback=None)
+                        checkpoint_callback=checkpoint_callback)
 
     return losses
 
