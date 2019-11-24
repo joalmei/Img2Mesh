@@ -6,7 +6,8 @@ from optimizer import Optimizer
 from prepare_data import prepareData, createBatches
 
 import tensorflow as tf
-import numpy        as np
+import numpy      as np
+import time
 
 # ==============================================================================
 def prepareTrain(path = './data/content/objnet/airplane/test',
@@ -37,22 +38,18 @@ def runTrainning(optim, X, Y,
 
 # ==============================================================================
 def saveCheckpoint(path = './checkpoints/check'):
-    import time;
-    return lambda model : { start = time.time(),
-                            print("Saving..."),
+    return lambda model : { print("Saving..."),
                             model.save_weights(path),
-                            print("Saved in ", time.time() - start, " secs !") }
+                            print("Save!")}
 
 # ==============================================================================
 def saveAndDownloadCheckpoint_colab(path = '/content/Img2Mesh/checkpoints/check'):
     from google.colab import files
-    import time;
-    return lambda model : { start = time.time(),
-                            print("Saving..."),
+    zip_path = path+'/checkpoint.zip'
+    return lambda model : { print("Saving..."),
                             model.save_weights(path),
-                            print("Saved in ", time.time() - start, " secs !"),
-                            zip_path = path+'/checkpoint.zip'
-                            !zip -r {zip_path} {path+"/*"}
+                            print("Save!"),
+                            !zip -r {zip_path} {path+"/*"},
                             files.download(zip_path) }
     
 # ==============================================================================
