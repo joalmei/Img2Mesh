@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import tensorflow.keras.backend as K
+import time
 
 import matplotlib.pyplot as plt
 
@@ -48,6 +49,8 @@ class Optimizer:
         train_loss_results = []
         
         for epoch in range(num_epochs):
+            start_time = time.time()
+
             loss_value = 0
             for batch in batches:
                 # Optimize the model
@@ -61,7 +64,9 @@ class Optimizer:
             train_loss_results.append(loss_value)
 
             if (epoch % 1 == 0):
-                print("-> epoch : ", epoch, " ; loss = ", loss_value)
+                print("epoch : ", epoch,
+                        " ; loss = ", loss_value,
+                        " (", time.time() - start_time ,"secs)")
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             

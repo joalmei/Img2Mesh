@@ -37,16 +37,20 @@ def runTrainning(optim, X, Y,
 
 # ==============================================================================
 def saveCheckpoint(path = './checkpoints/check'):
-    return lambda model : { print("Saving..."),
+    import time;
+    return lambda model : { start = time.time(),
+                            print("Saving..."),
                             model.save_weights(path),
-                            print("Save!") }
+                            print("Saved in ", time.time() - start, " secs !") }
 
 # ==============================================================================
 def saveAndDownloadCheckpoint_colab(path = '/content/Img2Mesh/checkpoints/check'):
     from google.colab import files
-    return lambda model : { print("Saving..."),
+    import time;
+    return lambda model : { start = time.time(),
+                            print("Saving..."),
                             model.save_weights(path),
-                            print("Save!"),
+                            print("Saved in ", time.time() - start, " secs !"),
                             files.download(path) }
     
 # ==============================================================================
