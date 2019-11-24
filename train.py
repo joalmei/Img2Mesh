@@ -8,12 +8,12 @@ from prepare_data import prepareData, createBatches
 import tensorflow as tf
 import numpy        as np
 
-def prepareTrain(path = './data/content/objnet/airplane/test', model='classic'):
+def prepareTrain(path = './data/content/objnet/airplane/test', model='classic', learning_rate=0.001):
     if (model == 'classic'):
         net = createNetwork(100, 50)
     else:
         net = createDeconvNetwork(100)
-    optim = Optimizer(net)
+    optim = Optimizer(net, learning_rate=learning_rate)
 
     X, Y = prepareData(path)
     X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
