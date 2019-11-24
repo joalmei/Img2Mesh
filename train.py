@@ -38,12 +38,16 @@ def runTrainning(optim, X, Y,
 
 # ==============================================================================
 def saveCheckpoint(path = './checkpoints/check', download_callback=None):
-    return lambda model : { print("Saving..."),
-                            model.save_weights(path),
-                            print("Save!"),
+    return lambda model : { saveModel(model, path),
                             download_callback(path) }
 
-#def download(path):
+def saveModel(model, path):
+    start = time.time()
+    print("Saving...")
+    model.save_weights(path)
+    print("Saved in ", time.time() - start, " secs!")
+
+# def download(path):
 #    from google.colab import files
 #    zip_path = path+'/checkpoint.zip'
 #    !zip -r {zip_path} {path+"/*"},
