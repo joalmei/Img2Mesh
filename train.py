@@ -37,20 +37,17 @@ def runTrainning(optim, X, Y,
     return losses
 
 # ==============================================================================
-def saveCheckpoint(path = './checkpoints/check'):
-    return lambda model : { print("Saving..."),
-                            model.save_weights(path),
-                            print("Save!")}
-
-# ==============================================================================
-def saveAndDownloadCheckpoint_colab(path = '/content/Img2Mesh/checkpoints/check'):
-    from google.colab import files
-    zip_path = path+'/checkpoint.zip'
+def saveCheckpoint(path = './checkpoints/check', download_callback=None):
     return lambda model : { print("Saving..."),
                             model.save_weights(path),
                             print("Save!"),
-                            !zip -r {zip_path} {path+"/*"},
-                            files.download(zip_path) }
+                            download_callback(path) }
+
+#def download(path):
+#    from google.colab import files
+#    zip_path = path+'/checkpoint.zip'
+#    !zip -r {zip_path} {path+"/*"},
+#    files.download(zip_path) }
     
 # ==============================================================================
 def updateModel(model, checkpoint_path):
