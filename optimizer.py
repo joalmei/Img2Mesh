@@ -45,14 +45,18 @@ class Optimizer:
     
     def train_epochs (self, X, Y, batches,
                         num_epochs=2000, minError=1e-3, minStep=1e-9,
-                        checkpoint_callback=None):
+                        checkpoint_callback=None, check_step=1):
         train_loss_results = []
         
         for epoch in range(num_epochs):
             start_time = time.time()
 
             loss_value = 0
+            nbatch = 0
             for batch in batches:
+                nbatch = nbatch + 1
+                if (int(100*nbatch/len(batches))%10):
+                    print("batches: ", int(100*nbatch/len(batches))%10)
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
@@ -63,16 +67,16 @@ class Optimizer:
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
 
-            if (epoch % 1 == 0):
+            if (epoch % check_step == 0):
                 print("epoch : ", epoch,
                         " ; loss = ", loss_value,
                         " (", time.time() - start_time ,"secs)")
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             
-            if (epoch % 1 == 0 and 
+            if (epoch % check_step == 0 and 
                 epoch > 1 and
-                (train_loss_results[-5] - loss_value < minStep) or
+                (train_loss_results[-check_step] - loss_value < minStep) or
                 loss_value < minError):
                 return train_loss_results, True
             
