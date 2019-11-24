@@ -55,7 +55,7 @@ class Optimizer:
             nbatch = 0
             for batch in batches:
                 nbatch = nbatch + 1
-                if (int(100*nbatch/len(batches))%10 == 0):
+                if (int(100.0*float(nbatch)/float(len(batches)))%10 == 0):
                     print("batches: ", int(100*nbatch/len(batches)))
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
