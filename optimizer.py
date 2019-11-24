@@ -78,8 +78,9 @@ class Optimizer:
             
             if (epoch % check_step == 0 and 
                 epoch > 1 and
-                (train_loss_results[-check_step] - loss_value < minStep) or
-                loss_value < minError):
+                ((train_loss_results[-check_step] - loss_value < minStep) or
+                loss_value < minError)):
+                print(train_loss_results[-check_step] , ' - ', loss_value, ' < ', minStep)
                 return train_loss_results, True
             
         return train_loss_results, False
