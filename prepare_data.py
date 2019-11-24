@@ -44,8 +44,11 @@ def createBatches (length, batch_size=16):
 def downsample(data, k=50000):
     out = []
     for d in data:
-        idx = np.random.choice(len(d), size=k, replace=False)
-        out.append(d[idx])
+        if len(d) > k:
+            idx = np.random.choice(len(d), size=k, replace=False)
+            out.append(d[idx])
+        else:
+            out.append(d)
     return out
 
 #  {'vertices': verts, 'faces': faces,
