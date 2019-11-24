@@ -24,7 +24,7 @@ def chamfer_loss(ref, targ):
     #closeRef = K.argmin(dist, axis=0)
     # !!! d(ref, targ) = sum_t(min_r (d(r, t))) + sum_r(min_t (d(r, t)))
     # http://graphics.stanford.edu/courses/cs468-17-spring/LectureSlides/L14%20-%203d%20deep%20learning%20on%20point%20cloud%20representation%20(analysis).pdf
-    return K.sum(K.min(dist, axis=1)) + K.sum(K.min(dist, axis=0))
+    return K.mean(K.min(dist, axis=1)) + K.mean(K.min(dist, axis=0))
 
 class Optimizer:
     def __init__ (self, model, learning_rate=0.001):
