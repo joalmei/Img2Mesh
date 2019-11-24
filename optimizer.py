@@ -54,11 +54,12 @@ class Optimizer:
             loss_value = 0
             nbatch = 0
             prevbatch = 0
+            print("batches: ", end='')
             for batch in batches:
                 nbatch = nbatch + 1
                 if (int(20*nbatch/len(batches)) > prevbatch):
                     prevbatch = int(10*nbatch/len(batches))
-                    print("batches: ", prevbatch * 10, end=',')
+                    print(prevbatch * 10, end=', ')
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
