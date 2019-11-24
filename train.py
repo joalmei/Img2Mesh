@@ -12,12 +12,13 @@ import time
 # ==============================================================================
 def prepareTrain(path = './data/content/objnet/airplane/test',
                     model='classic',
-                    learning_rate=0.001):
+                    learning_rate=0.001,
+                    hidden_size=1024):
 
     if (model == 'classic'):
-        net = createNetwork(100, 50)
+        net = createNetwork(hidden_size, 50)
     else:
-        net = createDeconvNetwork(100)
+        net = createDeconvNetwork()
     optim = Optimizer(net, learning_rate=learning_rate)
 
     X, Y = prepareData(path)

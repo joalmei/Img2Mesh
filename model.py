@@ -29,7 +29,7 @@ def createNetwork(hidden_size, out_vertices):
 
 
 # OUTPUT ALWAYS (50, 3)
-def createDeconvNetwork(hidden_size):
+def createDeconvNetwork():
     model = models.Sequential()
     model.add(layers.Conv3D(64, (2,3,3), input_shape=(6, 400, 400, 1)))
     model.add(layers.Conv3D(64, (1,3,3)))
