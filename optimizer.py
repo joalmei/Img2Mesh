@@ -61,7 +61,7 @@ class Optimizer:
             train_loss_results.append(loss_value)
 
             if (epoch % 1 == 0):
-                print("Saving... -> epoch : ", epoch, " ; loss = ", loss_value)
+                print("-> epoch : ", epoch, " ; loss = ", loss_value)
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             
