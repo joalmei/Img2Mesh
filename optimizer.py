@@ -55,8 +55,8 @@ class Optimizer:
             nbatch = 0
             for batch in batches:
                 nbatch = nbatch + 1
-                if (int(100*nbatch/len(batches))%10):
-                    print("batches: ", int(100*nbatch/len(batches))%10)
+                if (int(100*nbatch/len(batches))%10 == 0):
+                    print("batches: ", int(100*nbatch/len(batches)))
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
