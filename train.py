@@ -1,15 +1,18 @@
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from model import createNetwork
+from model import createNetwork, createDeconvNetwork
 from optimizer import Optimizer
 from prepare_data import prepareData, createBatches
 
 import tensorflow as tf
 import numpy        as np
 
-def prepareTrain(path = './data/content/objnet/airplane/test'):
-    net = createNetwork(100, 50)
+def prepareTrain(path = './data/content/objnet/airplane/test', model='classic'):
+    if (model == 'classic'):
+        net = createNetwork(100, 50)
+    else:
+        net = createDeconvNetwork(100)
     optim = Optimizer(net)
 
     X, Y = prepareData(path)

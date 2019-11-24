@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 
 def chamfer_loss(ref, targ):
     nr = ref.shape[0]
-    nt = int(targ.shape[0] / 3)
+    nt = targ.shape[0]
 
     #ref = tf.reshape(ref, (nr, 3))
-    targ = tf.reshape(targ, (nt, 3))
+    #targ = tf.reshape(targ, (nt, 3))
 
     r = tf.tile(ref, [nt, 1])
     r = tf.reshape(r, [nt, nr, 3])
