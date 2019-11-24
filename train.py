@@ -26,7 +26,7 @@ def prepareTrain(path = './data/content/objnet/airplane/test',
     return net, optim, X, Y
 
 # ==============================================================================
-def runTrainning(optim, X, Y,
+def runTraining(optim, X, Y,
                 batch_size=16, min_error=1e-3, min_step=1e-3,
                 checkpoint_callback=None):
     batches = createBatches(len(X), batch_size=batch_size)

@@ -1,6 +1,7 @@
 import os
 import glob
 import numpy as np
+from random import sample
 
 def fetchData (path):
     X = []
@@ -25,6 +26,7 @@ def prepareData (path):
         for j in range(len(X[i])):
             idx = X[i][j] > 0
             X[i][j][idx] = 1
+
     return X, Y
 
 def createBatches (length, batch_size=16):
@@ -38,6 +40,13 @@ def createBatches (length, batch_size=16):
     batches.append(slice(offset, None))
 
     return batches
+
+def downsample(data, k=50000):
+    out = []
+    for d in data:
+        idx = np.random.choice(len(d), size=k, replace=False)
+        out.append(d[idx])
+    return out
 
 #  {'vertices': verts, 'faces': faces,
 #   'top': top, 'bottom': bottom,
