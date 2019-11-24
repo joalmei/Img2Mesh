@@ -56,7 +56,7 @@ class Optimizer:
             prevbatch = 0
             for batch in batches:
                 nbatch = nbatch + 1
-                if (int(100*nbatch/len(batches)) > prevbatch)):
+                if (int(100*nbatch/len(batches)) > prevbatch):
                     prevbatch = int(100*nbatch/len(batches))
                 if (prevbatch % 20 == 0):
                     print("batches: ", prevbatch)
