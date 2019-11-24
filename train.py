@@ -46,7 +46,7 @@ def saveAndDownloadCheckpoint_colab(path = '/content/Img2Mesh/checkpoints/check'
     from google.colab import files
     return lambda model : { print("Saving..."),
                             model.save_weights(path),
-                            print("Save!") },
+                            print("Save!"),
                             files.download(path) }
     
 # ==============================================================================
