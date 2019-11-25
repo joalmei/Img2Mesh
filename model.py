@@ -6,9 +6,9 @@ def createNetwork(hidden_size, out_vertices):
     #K.set_floatx('float32')
 
     model = models.Sequential()
-    model.add(layers.Conv3D(64, (2,3,3), input_shape=(6, 400, 400, 1)),
+    model.add(layers.Conv3D(64, (2,3,3), input_shape=(6, 400, 400, 1),
                             bias_initializer=tf.random_uniform_initializer(-1e-2,1e-2),
-                            kernel_initializer=tf.random_uniform_initializer(-1e-2,1e-2))
+                            kernel_initializer=tf.random_uniform_initializer(-1e-2,1e-2)))
     model.add(layers.Conv3D(64, (1,3,3),
                             bias_initializer=tf.random_uniform_initializer(-1e-2,1e-2),
                             kernel_initializer=tf.random_uniform_initializer(-1e-2,1e-2)))
