@@ -26,6 +26,9 @@ def prepareData (path):
         for j in range(len(X[i])):
             idx = X[i][j] > 0
             X[i][j][idx] = 1
+    
+    for i in range(len(Y)):
+        Y[i] = (Y[i] + 1)/2
 
     return X, Y
 
