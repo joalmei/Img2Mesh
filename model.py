@@ -23,11 +23,11 @@ def createNetwork(hidden_size, out_vertices):
 
     model.add(layers.Flatten())
     model.add(layers.Dense(hidden_size, activation='relu',
-                            bias_initializer=tf.random_uniform_initializer(-1e-1,1e-1),
-                            kernel_initializer=tf.random_uniform_initializer(-1e-1,1e-1)))
+                            bias_initializer=tf.random_uniform_initializer(-1e-4,1e-4),
+                            kernel_initializer=tf.random_uniform_initializer(-1e-4,1e-4)))
     model.add(layers.Dense(3 * out_vertices, activation='relu',
-                            bias_initializer='ones',
-                            kernel_initializer='ones'))
+                            bias_initializer=tf.random_uniform_initializer(-1e-3,1e-3),
+                            kernel_initializer=tf.random_uniform_initializer(-1e-3,1e-3)))
     model.add(layers.Reshape((out_vertices, 3)))
 
     return model
