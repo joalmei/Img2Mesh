@@ -61,7 +61,7 @@ def createLeanNetwork(hidden_size, out_vertices):
                             kernel_initializer=tf.random_uniform_initializer(0,1)))
 
     model.add(layers.Dropout(0.1))
-    model.add(layers.Dense(3 * out_vertices,
+    model.add(layers.Dense(3 * out_vertices, activation='tanh',
                             bias_initializer=tf.random_uniform_initializer(0,1),
                             kernel_initializer=tf.random_uniform_initializer(0,1)))
     model.add(layers.Reshape((out_vertices, 3)))
