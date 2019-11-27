@@ -8,48 +8,24 @@ def createNetwork(hidden_size, out_vertices):
     #K.set_floatx('float32')
 
     model = models.Sequential()
-    model.add(layers.Conv3D(64, (2,3,3), input_shape=(6, 400, 400, 1),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
-    model.add(layers.Conv3D(64, (1,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+    model.add(layers.Conv3D(64, (2,3,3), input_shape=(6, 400, 400, 1)))
+    model.add(layers.Conv3D(64, (1,3,3)))
     model.add(layers.MaxPooling3D((1, 2, 2)))
-    model.add(layers.Conv3D(128, (2,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
-    model.add(layers.Conv3D(128, (1,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+    model.add(layers.Conv3D(128, (2,3,3)))
+    model.add(layers.Conv3D(128, (1,3,3)))
     model.add(layers.MaxPooling3D((1, 2, 2)))
-    model.add(layers.Conv3D(256, (2,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
-    model.add(layers.Conv3D(256, (1,4,4),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+    model.add(layers.Conv3D(256, (2,3,3)))
+    model.add(layers.Conv3D(256, (1,4,4)))
     model.add(layers.MaxPooling3D((1, 2, 2)))
-    model.add(layers.Conv3D(512, (2,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
-    model.add(layers.Conv3D(512, (1,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+    model.add(layers.Conv3D(512, (2,3,3)))
+    model.add(layers.Conv3D(512, (1,3,3)))
     model.add(layers.MaxPooling3D((1, 2, 2)))
-    model.add(layers.Conv3D(1024, (2,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
-    model.add(layers.Conv3D(1024, (1,3,3),
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+    model.add(layers.Conv3D(1024, (2,3,3)))
+    model.add(layers.Conv3D(1024, (1,3,3)))
 
     model.add(layers.Flatten())
-    model.add(layers.Dense(hidden_size, activation='relu',
-                            bias_initializer=tf.random_uniform_initializer(0,1),
-                            kernel_initializer=tf.random_uniform_initializer(0,1)))
-    model.add(layers.Dense(3 * out_vertices, activation='relu',
-                            bias_initializer=tf.random_uniform_initializer(0,1),
-                            kernel_initializer=tf.random_uniform_initializer(0,1)))
+    model.add(layers.Dense(hidden_size, activation='relu'))
+    model.add(layers.Dense(3 * out_vertices, activation='relu'))
     model.add(layers.Reshape((out_vertices, 3)))
 
     return model
@@ -62,25 +38,19 @@ def createLeanNetwork(hidden_size, out_vertices):
                                     data_format='channels_first'))
 
     model.add(layers.Conv2D(64, (5,5),
-                            data_format='channels_first',
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+                            data_format='channels_first'))
 
     model.add(layers.MaxPooling2D((3, 3),
                                     data_format='channels_first'))
 
     model.add(layers.Conv2D(128, (3,3),
-                            data_format='channels_first',
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+                            data_format='channels_first'))
 
     model.add(layers.MaxPooling2D((3, 3),
                                     data_format='channels_first'))
 
     model.add(layers.Conv2D(256, (3,3),
-                            data_format='channels_first',
-                            bias_initializer=tf.random_uniform_initializer(-1,1),
-                            kernel_initializer=tf.random_uniform_initializer(-1,1)))
+                            data_format='channels_first'))
 
     model.add(layers.Flatten())
 
