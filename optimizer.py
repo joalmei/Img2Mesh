@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 import tensorflow.keras.backend as K
 import time
+import random
 
 import matplotlib.pyplot as plt
 
@@ -43,11 +44,12 @@ class Optimizer:
             loss_value = self.loss(xs, ys)
         return loss_value, tape.gradient(loss_value, self.model.trainable_variables)
     
-    def train_epochs (self, X, Y, batches,
+    def train_epochs (self, X, Y, in_batches,
                         num_epochs=2000, minError=1e-3, minStep=1e-9,
                         checkpoint_callback=None, check_step=1):
         train_loss_results = []
-        
+        batches = in_batches
+
         for epoch in range(num_epochs):
             start_time = time.time()
 
@@ -55,6 +57,7 @@ class Optimizer:
             nbatch = 0
             prevbatch = 0
             print("batches: ", end='')
+            random.shuffle(batches)
             for batch in batches:
                 nbatch = nbatch + 1
                 if (int(10*nbatch/len(batches)) > prevbatch):
