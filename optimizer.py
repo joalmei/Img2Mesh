@@ -65,12 +65,10 @@ class Optimizer:
                     print(prevbatch * 10, end=', ')
                 # Optimize the model
                 lossv, grads = self.grad(X[batch], Y[batch])
-                print('lossv: ', lossv)
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
 
                 # End epoch
                 loss_value = K.mean(lossv) + loss_value
-                print('loss_value: ', loss_value)
 
             loss_value = loss_value / len(batches)
             train_loss_results.append(loss_value)
