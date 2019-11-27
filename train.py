@@ -10,9 +10,19 @@ import numpy      as np
 import time
 
 # ==============================================================================
-def prepareTrainData(path = './data/content/objnet/airplane/test'):
+def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0):
 
     X, Y = prepareData(path)
+
+    if (ratio > 0 and ratio < 1):
+        outX = []
+        outY = []
+        for i in np.random.choice(len(X), size=int(ratio*len(X)), replace=False):
+            outX.append(X[i])
+            outY.append(Y[i])
+        X = outX
+        Y = outY
+
     X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
 
     return X, Y
