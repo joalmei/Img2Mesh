@@ -1,7 +1,7 @@
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from model import createNetwork, createDeconvNetwork
+from model import createNetwork, createDeconvNetwork, createLeanNetwork
 from optimizer import Optimizer
 from prepare_data import prepareData, createBatches
 
