@@ -10,7 +10,7 @@ import numpy      as np
 import time
 
 # ==============================================================================
-def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0):
+def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0, shape='3D'):
 
     X, Y = prepareData(path)
 
@@ -23,7 +23,10 @@ def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0):
         X = outX
         Y = outY
 
-    X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
+    if (shape == '3D'):
+        X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
+    else:
+        X = tf.constant(X, shape=[len(X), 6, 400, 400])
 
     return X, Y
 
@@ -31,6 +34,8 @@ def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0):
 def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024):
     if (model == 'classic'):
         net = createNetwork(hidden_size, 50)
+    elif (model == 'lean'):
+        net = createLeanNetwork(hidden_size, 50)
     else:
         net = createDeconvNetwork()
     optim = Optimizer(net, learning_rate=learning_rate)
