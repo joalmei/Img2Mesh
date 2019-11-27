@@ -20,15 +20,22 @@ def fetchData (path):
 
     return X, Y
 
-def prepareData (path):
-    X, Y = fetchData(path)
-    for i in range(len(X)):
-        for j in range(len(X[i])):
-            idx = X[i][j] > 0
-            X[i][j][idx] = 1
+def prepareData (paths):
+    #X, Y = fetchData(path)
+    #for i in range(len(X)):
+    #    for j in range(len(X[i])):
+    #        idx = X[i][j] > 0
+    #        X[i][j][idx] = 1
     
-    for i in range(len(Y)):
-        Y[i] = (Y[i] + 1)/2
+    #for i in range(len(Y)):
+    #    Y[i] = (Y[i] + 1)/2
+
+    X = []
+    Y = []
+    for p in paths:
+        x_p, y_p = fetchData(p)
+        X.extend(x_p)
+        Y.extend(y_p)
 
     return X, Y
 
