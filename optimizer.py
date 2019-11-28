@@ -77,26 +77,35 @@ class Optimizer:
 
             if (epoch % check_step == 0):
                 print("epoch : ", epoch,
-                        " ; loss = ", loss_value,
+                        " ; loss = ", int(loss_value),
                         " (", time.time() - start_time ,"secs)")
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             
-            if (epoch % check_step == 0 and 
-                epoch > 1 and
-                ((train_loss_results[-check_step-1] - loss_value < minStep) or
-                loss_value < minError)):
-                print(train_loss_results[-check_step-1] , ' - ', loss_value, ' < ', minStep)
+            # if (epoch % check_step == 0 and 
+            #     epoch > 1 and
+            #     ((train_loss_results[-check_step-1] - loss_value < minStep) or
+            #     loss_value < minError)):
+            #     print(int(train_loss_results[-check_step-1]) , ' - ', int(loss_value), ' < ', minStep)
+            #     return train_loss_results, True
+            if (epoch % check_step == 0 and epoch > 1 and loss_value < minError):
+                print('minError achieved at ', int(loss_value))
                 return train_loss_results, True
             
+
         return train_loss_results, False
     
     def train (self, X, Y, batches,
                 min_error=1e-3, min_step=1e-3, plot=False,
-                checkpoint_callback=None):
+                checkpoint_callback=None,
+                max_repets=10):
         losses = []
         interrupt = False
+        repet = 0
         while (not interrupt):
+            repet = repet + 1
+            if (repet > max_repets):
+                break
             print("========================================================================")
             loss, interrupt = self.train_epochs(X, Y, batches,
                                                 num_epochs=10,
@@ -107,6 +116,7 @@ class Optimizer:
             if (plot == True):
                 plt.plot(loss)
                 plt.show()
+        print("Trainning finished!")
         return losses
     
     def predict (self, X):
