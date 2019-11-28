@@ -77,7 +77,7 @@ class Optimizer:
 
             if (epoch % check_step == 0):
                 print("epoch : ", epoch,
-                        " ; loss = ", int(loss_value),
+                        " ; loss = ", float(loss_value),
                         " (", time.time() - start_time ,"secs)")
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
@@ -89,7 +89,7 @@ class Optimizer:
             #     print(int(train_loss_results[-check_step-1]) , ' - ', int(loss_value), ' < ', minStep)
             #     return train_loss_results, True
             if (epoch % check_step == 0 and epoch > 1 and loss_value < minError):
-                print('minError achieved at ', int(loss_value))
+                print('minError achieved at ', float(loss_value))
                 return train_loss_results, True
             
 
