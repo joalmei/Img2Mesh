@@ -31,79 +31,27 @@ def createNetwork(hidden_size, out_vertices):
     return model
 
 def createLeanNetwork(hidden_size, out_vertices):
-    # model = models.Sequential()
-    # model.add(layers.MaxPooling2D((8, 8), input_shape=(6, 400, 400),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Conv2D(64, (3,3),
-    #                         data_format='channels_first'))
-
-    # model.add(layers.MaxPooling2D((8, 8),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Conv2D(128, (3,3),
-    #                         data_format='channels_first'))
-
-    # model.add(layers.Flatten())
-    # model.add(layers.Dropout(0.1))
-    # model.add(layers.Dense(hidden_size, activation='relu'))
-
-    # model.add(layers.Dropout(0.1))
-    # model.add(layers.Dense(3 * out_vertices, activation='tanh'))
-    # model.add(layers.Reshape((out_vertices, 3)))
-
-    # model = models.Sequential()
-    # model.add(layers.MaxPooling2D((8, 8), input_shape=(1, 400, 400),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Conv2D(16, (3,3),
-    #                         data_format='channels_first'))
-
-    # model.add(layers.MaxPooling2D((2, 2),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Conv2D(32, (3,3),
-    #                         data_format='channels_first'))
-
-    # model.add(layers.MaxPooling2D((2, 2),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Conv2D(64, (3,3),
-    #                         data_format='channels_first'))
-
-    # model.add(layers.MaxPooling2D((2, 2),
-    #                                 data_format='channels_first'))
-
-    # model.add(layers.Flatten())
-    # model.add(layers.Dropout(0.1))
-    # model.add(layers.Dense(hidden_size, activation='relu'))
-
-    # model.add(layers.Dropout(0.1))
-    # model.add(layers.Dense(3 * out_vertices, activation='tanh'))
-    # model.add(layers.Reshape((out_vertices, 3)))
-
-
     model = models.Sequential()
-    model.add(layers.MaxPooling2D((4, 4), input_shape=(1, 400, 400),
-                                    data_format='channels_first'))
-
-    model.add(layers.Conv2D(4, (3,3),
-                            data_format='channels_first'))
-
-    model.add(layers.MaxPooling2D((4, 4),
-                                    data_format='channels_first'))
-
-    model.add(layers.Conv2D(8, (3,3),
-                            data_format='channels_first'))
-
-    model.add(layers.MaxPooling2D((4, 4),
+    model.add(layers.MaxPooling2D((8, 8), input_shape=(1, 400, 400),
                                     data_format='channels_first'))
 
     model.add(layers.Conv2D(16, (3,3),
                             data_format='channels_first'))
 
-    #model.add(layers.MaxPooling2D((2, 2),
-    #                                data_format='channels_first'))
+    model.add(layers.MaxPooling2D((2, 2),
+                                    data_format='channels_first'))
+
+    model.add(layers.Conv2D(32, (3,3),
+                            data_format='channels_first'))
+
+    model.add(layers.MaxPooling2D((2, 2),
+                                    data_format='channels_first'))
+
+    model.add(layers.Conv2D(64, (3,3),
+                            data_format='channels_first'))
+
+    model.add(layers.MaxPooling2D((2, 2),
+                                    data_format='channels_first'))
 
     model.add(layers.Flatten())
     model.add(layers.Dropout(0.3))
@@ -112,6 +60,37 @@ def createLeanNetwork(hidden_size, out_vertices):
     model.add(layers.Dropout(0.3))
     model.add(layers.Dense(3 * out_vertices, activation='softmax'))
     model.add(layers.Reshape((out_vertices, 3)))
+
+
+    # model = models.Sequential()
+    # model.add(layers.MaxPooling2D((4, 4), input_shape=(1, 400, 400),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(4, (3,3),
+    #                         data_format='channels_first'))
+
+    # model.add(layers.MaxPooling2D((4, 4),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(8, (3,3),
+    #                         data_format='channels_first'))
+
+    # model.add(layers.MaxPooling2D((4, 4),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(16, (3,3),
+    #                         data_format='channels_first'))
+
+    # #model.add(layers.MaxPooling2D((2, 2),
+    # #                                data_format='channels_first'))
+
+    # model.add(layers.Flatten())
+    # model.add(layers.Dropout(0.3))
+    # model.add(layers.Dense(hidden_size, activation='relu'))
+
+    # model.add(layers.Dropout(0.3))
+    # model.add(layers.Dense(3 * out_vertices, activation='softmax'))
+    # model.add(layers.Reshape((out_vertices, 3)))
 
     return model
 
