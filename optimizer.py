@@ -114,6 +114,7 @@ class Optimizer:
                                                 checkpoint_callback=checkpoint_callback)
             losses.extend(loss)
             if (plot == True):
+                plt.plot(losses)
                 plt.plot(loss)
                 plt.show()
         print("Trainning finished!")
