@@ -3,6 +3,7 @@ from tensorflow import keras
 import tensorflow.keras.backend as K
 import time
 import random
+from operator import itemgetter 
 
 import matplotlib.pyplot as plt
 
@@ -57,7 +58,14 @@ class Optimizer:
             nbatch = 0
             prevbatch = 0
             print("batches: ", end='')
-            random.shuffle(batches)
+            #random.shuffle(batches)
+            
+            #SHUFFLES THE DATASET
+            indices = tf.range(start=0, limit=tf.shape(X)[0], dtype=tf.int32)
+            shuffled_indices = tf.random.shuffle(indices)
+            X = tf.gather(X, shuffled_indices)
+            Y = list(itemgetter(*shuffled_indices)(Y)) 
+
             for batch in batches:
                 nbatch = nbatch + 1
                 if (int(10*nbatch/len(batches)) > prevbatch):
