@@ -50,11 +50,13 @@ def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024, out_verts=
 def runTraining(optim, X, Y,
                 batch_size=16, min_error=1e-3, min_step=1e-3,
                 checkpoint_callback=None,
+                num_epochs=10,
                 max_repets=10):
     batches = createBatches(len(X), batch_size=batch_size)
     losses = optim.train(X, Y, batches,
                         min_error=min_error, min_step=min_step, plot=True,
                         checkpoint_callback=checkpoint_callback,
+                        num_epochs=num_epochs,
                         max_repets=max_repets)
 
     return losses

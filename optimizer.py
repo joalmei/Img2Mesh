@@ -107,6 +107,7 @@ class Optimizer:
     def train (self, X, Y, batches,
                 min_error=1e-3, min_step=1e-3, plot=False,
                 checkpoint_callback=None,
+                num_epochs=10,
                 max_repets=10):
         losses = []
         interrupt = False
@@ -117,7 +118,7 @@ class Optimizer:
                 break
             print("========================================================================")
             loss, interrupt = self.train_epochs(X, Y, batches,
-                                                num_epochs=10,
+                                                num_epochs=num_epochs,
                                                 minError=min_error,
                                                 minStep=min_step,
                                                 checkpoint_callback=checkpoint_callback)

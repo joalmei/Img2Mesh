@@ -110,7 +110,7 @@ def createLeanNetwork(hidden_size, out_vertices):
     model.add(layers.Dense(hidden_size, activation='relu'))
 
     model.add(layers.Dropout(0.3))
-    model.add(layers.Dense(3 * out_vertices, activation='tanh'))
+    model.add(layers.Dense(3 * out_vertices, activation='softmax'))
     model.add(layers.Reshape((out_vertices, 3)))
 
     return model
