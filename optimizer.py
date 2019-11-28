@@ -112,7 +112,8 @@ class Optimizer:
                                                 minError=min_error,
                                                 minStep=min_step,
                                                 checkpoint_callback=checkpoint_callback)
-            losses.extend(loss)
+            if (repet > 1):
+                losses.extend(loss)
             if (plot == True):
                 plt.plot(losses)
                 plt.plot(loss)
