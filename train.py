@@ -10,9 +10,9 @@ import numpy      as np
 import time
 
 # ==============================================================================
-def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0, shape='3D'):
+def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0, shape='3D', lean=True):
 
-    X, Y = prepareData(path)
+    X, Y = prepareData(path, lean=lean)
 
     if (ratio > 0 and ratio < 1):
         outX = []
@@ -31,11 +31,11 @@ def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0, shap
     return X, Y
 
 # ==============================================================================
-def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024):
+def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024, out_verts=32):
     if (model == 'classic'):
-        net = createNetwork(hidden_size, 50)
+        net = createNetwork(hidden_size, out_verts)
     elif (model == 'lean'):
-        net = createLeanNetwork(hidden_size, 50)
+        net = createLeanNetwork(hidden_size, out_verts)
     else:
         net = createDeconvNetwork()
     optim = Optimizer(net, learning_rate=learning_rate)

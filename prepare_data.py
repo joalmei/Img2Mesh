@@ -3,7 +3,7 @@ import glob
 import numpy as np
 from random import sample
 
-def fetchData (path):
+def fetchData (path, lean=True):
     X = []
     Y = []
 
@@ -11,16 +11,19 @@ def fetchData (path):
     for file in files:
         data = np.load(file, allow_pickle=True).item()
         
-        X.append([
-            data['top'],    data['bottom'],
-            data['front'],  data['back'],
-            data['left'],   data['right']])
+        if (lean == True):
+            X.append([data['left']])
+        else:
+            X.append([
+                data['top'],    data['bottom'],
+                data['front'],  data['back'],
+                data['left'],   data['right']])
 
         Y.append(np.array(data['vertices'], dtype='float32'))
 
     return X, Y
 
-def prepareData (paths):
+def prepareData (paths, lean=True):
     #X, Y = fetchData(path)
     #for i in range(len(X)):
     #    for j in range(len(X[i])):
@@ -33,7 +36,7 @@ def prepareData (paths):
     X = []
     Y = []
     for p in paths:
-        x_p, y_p = fetchData(p)
+        x_p, y_p = fetchData(p, lean=lean)
         X.extend(x_p)
         Y.extend(y_p)
 
