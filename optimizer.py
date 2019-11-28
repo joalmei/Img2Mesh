@@ -127,8 +127,10 @@ class Optimizer:
             if (plot == True):
                 plt.plot(losses)
                 plt.plot(loss)
-                plt.show()
         print("Trainning finished!")
+        if (plot == True):
+            plt.plot(losses)
+            plt.show()
         return losses
     
     def predict (self, X):
