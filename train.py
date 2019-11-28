@@ -60,9 +60,7 @@ def saveCheckpoint(path = './checkpoints/check', download_callback=None):
 
 def saveModel(model, path):
     start = time.time()
-    print("Saving...")
     model.save_weights(path)
-    print("Saved in ", time.time() - start, " secs!")
 
 # def download(path):
 #    from google.colab import files
