@@ -3,7 +3,6 @@ from tensorflow import keras
 import tensorflow.keras.backend as K
 import time
 import random
-import numpy as np
 
 import matplotlib.pyplot as plt
 
@@ -85,7 +84,7 @@ class Optimizer:
             
             if (epoch % check_step == 0 and 
                 epoch > 1 and
-                ((np.absolute(train_loss_results[-check_step-1] - loss_value) < minStep) or
+                ((train_loss_results[-check_step-1] - loss_value < minStep) or
                 loss_value < minError)):
                 print(train_loss_results[-check_step-1] , ' - ', loss_value, ' < ', minStep)
                 return train_loss_results, True
