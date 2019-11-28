@@ -23,10 +23,14 @@ def prepareTrainData(path = './data/content/objnet/airplane/test', ratio=0, shap
         X = outX
         Y = outY
 
+    n_channels = 6
+    if (lean == True):
+        n_channels = 1
+
     if (shape == '3D'):
-        X = tf.constant(X, shape=[len(X), 6, 400, 400, 1])
+        X = tf.constant(X, shape=[len(X), n_channels, 400, 400, 1])
     else:
-        X = tf.constant(X, shape=[len(X), 6, 400, 400])
+        X = tf.constant(X, shape=[len(X), n_channels, 400, 400])
 
     return X, Y
 
