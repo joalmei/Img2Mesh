@@ -33,37 +33,54 @@ def createNetwork(hidden_size, out_vertices):
 def createLeanNetwork(hidden_size, out_vertices):
     #K.set_floatx('float32')
 
+    # model = models.Sequential()
+    # model.add(layers.MaxPooling2D((4, 4), input_shape=(6, 400, 400),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(64, (5,5),
+    #                         data_format='channels_first'))
+
+    # model.add(layers.MaxPooling2D((3, 3),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(128, (3,3),
+    #                         data_format='channels_first'))
+
+    # model.add(layers.MaxPooling2D((3, 3),
+    #                                 data_format='channels_first'))
+
+    # model.add(layers.Conv2D(256, (3,3),
+    #                         data_format='channels_first'))
+
+    # model.add(layers.Flatten())
+
+    # model.add(layers.Dropout(0.1))
+
+    # model.add(layers.Dense(hidden_size, activation='relu'))
+
+    # model.add(layers.Dropout(0.1))
+    # model.add(layers.Dense(3 * out_vertices, activation='tanh'))
+    # model.add(layers.Reshape((out_vertices, 3)))
+    
     model = models.Sequential()
-    model.add(layers.MaxPooling2D((4, 4), input_shape=(6, 400, 400),
+    model.add(layers.MaxPooling2D((8, 8), input_shape=(6, 400, 400),
                                     data_format='channels_first'))
 
-    model.add(layers.Conv2D(64, (5,5),
+    model.add(layers.Conv2D(64, (3,3),
                             data_format='channels_first'))
 
-    model.add(layers.MaxPooling2D((3, 3),
+    model.add(layers.MaxPooling2D((8, 8),
                                     data_format='channels_first'))
 
     model.add(layers.Conv2D(128, (3,3),
                             data_format='channels_first'))
 
-    model.add(layers.MaxPooling2D((3, 3),
-                                    data_format='channels_first'))
-
-    model.add(layers.Conv2D(256, (3,3),
-                            data_format='channels_first'))
-
     model.add(layers.Flatten())
+    model.add(layers.Dropout(0.1))
+    model.add(layers.Dense(hidden_size, activation='relu'))
 
     model.add(layers.Dropout(0.1))
-
-    model.add(layers.Dense(hidden_size, activation='relu', kernel_constraint=MaxNorm(3),
-                            bias_initializer=tf.random_uniform_initializer(0,1),
-                            kernel_initializer=tf.random_uniform_initializer(0,1)))
-
-    model.add(layers.Dropout(0.1))
-    model.add(layers.Dense(3 * out_vertices, activation='tanh',
-                            bias_initializer=tf.random_uniform_initializer(0,1),
-                            kernel_initializer=tf.random_uniform_initializer(0,1)))
+    model.add(layers.Dense(3 * out_vertices, activation='tanh'))
     model.add(layers.Reshape((out_vertices, 3)))
 
     return model
