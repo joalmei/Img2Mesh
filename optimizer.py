@@ -126,9 +126,10 @@ class Optimizer:
                 losses.extend(loss)
             if (plot == True):
                 plt.plot(losses)
-                plt.plot(loss)
+                plt.plot(loss, label=str(repet))
         print("Trainning finished!")
         if (plot == True):
+            plt.show()
             plt.plot(losses)
             plt.show()
         return losses
