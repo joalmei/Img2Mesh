@@ -31,7 +31,8 @@ def chamfer_loss(ref, targ):
 class Optimizer:
     def __init__ (self, model, learning_rate=0.001):
         self.model = model    
-        self.optimizer = keras.optimizers.Adamax(learning_rate=learning_rate)
+        #self.optimizer = keras.optimizers.Adamax(learning_rate=learning_rate)
+        self.optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
 
     def loss (self, xs, ys):
         out = []
