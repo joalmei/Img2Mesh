@@ -6,12 +6,12 @@ import tensorflow.keras.backend as K
 # ==============================================================================
 # compute vertex normals using keras backend primitives
 # vertices : (out_verts, 3) tensor
-# faces : tensor / ndarray of faces indexes (BASED IN 0 PLEASE!)
+# faces : tensor / ndarray of faces indexes (BASED IN 1 PLEASE!)
 # mask : tensor / ndarray MASK (for each vertex index, the indeses of the faces it belongs)
 def get_tensor_normals(vertices, faces, mask):
-    v0 = tf.gather(vertices, faces[:,0])
-    v1 = tf.gather(vertices, faces[:,1])
-    v2 = tf.gather(vertices, faces[:,2])
+    v0 = tf.gather(vertices, faces[:,0] - 1)
+    v1 = tf.gather(vertices, faces[:,1] - 1)
+    v2 = tf.gather(vertices, faces[:,2] - 1)
     n_faces = tf.linalg.cross(v2 - v1, v0 - v1)
     n_vertex = tf.gather(n_faces, mask)             # list of face normals for each vertex
     return K.mean(n_vertex)
