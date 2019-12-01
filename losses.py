@@ -21,7 +21,7 @@ def normal_loss (ref_normals, targ_normals, closest_ref):
     # return mean(dot(ref_normals, targ_normals[closest]))
     # K.mean(K.sum(ref_normals * tf.gather(targ_normals, closest_ref), axis=1))
     # !! SQUARE, SO IT IS CONVEX!!!
-    return K.mean(K.square(K.sum(ref_normals * tf.gather(targ_normals, closest_ref), axis=1)))
+    return 1 - K.mean(K.square(K.sum(ref_normals * tf.gather(targ_normals, closest_ref), axis=1)))
 
 # ==============================================================================
 # ref  : original
