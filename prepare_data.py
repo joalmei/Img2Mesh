@@ -3,6 +3,7 @@ import glob
 import numpy as np
 from random import sample
 from tools_3d import obj_normals
+from obj_tools import read_obj
 
 def fetchData (path, lean=True, fetch_faces=False):
     X = []
@@ -109,3 +110,20 @@ def downsample(data, k=50000, get_normals=False, faces=None):
 #   'top': top, 'bottom': bottom,
 #   'front': front, 'back': back,
 #   'left': left, 'right': right};
+
+def prepare_mask(path='./models/ico_162.obj'):
+    _, faces = read_obj(path)
+    mask = []
+    lens = []
+    for i in np.unique(faces):
+        mask.append(np.where(faces == i)[0])
+        lens.append(len(mask[-1]))
+    
+    max_l = np.max(lens)
+    for i in range(len(mask)):
+        if (lens[i] < max_l):
+            mask[i] = np.pad(mask[i],
+                             (0, max_l - lens[i]),
+                             constant_values=np.random.choice(mask[i]))
+    
+    return np.array(faces), np.array(mask)
