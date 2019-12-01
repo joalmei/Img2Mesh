@@ -37,7 +37,7 @@ def chamfer_loss(ref, targ, return_argmin=False):
     dist = K.sum(K.square(r - t), axis=2)
 
     if (return_argmin == True):
-        closest = K.argmin(dist, axis=1)
+        closest = K.argmin(dist, axis=0)
         loss = (K.mean(K.min(dist, axis=1)) + K.mean(K.min(dist, axis=0))) / 2
         return loss, closest
     else:
