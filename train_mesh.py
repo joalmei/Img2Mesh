@@ -33,11 +33,13 @@ def prepareTrainData(path = ['./data/content/objnet/airplane/test'], ratio=0):
 # ==============================================================================
 def prepareNN(hidden_size=1024, out_verts=162,
               learning_rate=0.001,
-              targ_obj_path='./models/ico_162.obj'):
+              targ_obj_path='./models/ico_162.obj',
+              norm_weight=0.1):
     
     net = createLeanNetwork(hidden_size, out_verts)
     faces, mask = prepare_mask(targ_obj_path)
-    optim = Optimizer(net, faces=faces, mask=mask, learning_rate=learning_rate)
+    optim = Optimizer(net, faces=faces, mask=mask,
+                      learning_rate=learning_rate, norm_weight=0.1)
 
     return net, optim
 

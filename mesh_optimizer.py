@@ -13,11 +13,12 @@ class Optimizer:
     # model output, faces and mask are SUPER TANGGLED!!!!!
     # TODO: untagle
 
-    def __init__ (self, model, faces, mask, learning_rate=0.001):
+    def __init__ (self, model, faces, mask, learning_rate=0.001, norm_weight=0.1):
         self.model = model
         self.optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
         self.faces = faces
         self.mask = mask
+        self.norm_weight = norm_weight
 
     def loss (self, xs, ys, ys_normals):
         out = []
@@ -26,7 +27,8 @@ class Optimizer:
         for ref, ref_normals, targ in zip(ys, ys_normals, targ_verts):
             out.append(complete_loss(
                                         ref, ref_normals,
-                                        targ, self.faces, self.mask
+                                        targ, self.faces, self.mask,
+                                        norm_weight=self.norm_weight
                                         ))
         return tf.stack(out)
 

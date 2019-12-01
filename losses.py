@@ -45,11 +45,12 @@ def chamfer_loss(ref, targ, return_argmin=False):
 
 # ==============================================================================
 def complete_loss ( ref_verts, ref_normals,
-                    targ_verts, targ_faces, targ_face_mask):
+                    targ_verts, targ_faces, targ_face_mask,
+                    norm_weight=0.1):
     ch_loss, closest_ref = chamfer_loss(ref_verts, targ_verts, True)
     targ_normals = get_tensor_normals(targ_verts, targ_faces, targ_face_mask)
     norm_loss = normal_loss(ref_normals, targ_normals, closest_ref)
-    return 0.9 * ch_loss + 0.1 * norm_loss
+    return (1-norm_weight) * ch_loss + norm_weight * norm_loss
 
 
 # OBS : Info on losses
