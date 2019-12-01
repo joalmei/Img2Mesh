@@ -26,3 +26,16 @@ def write_point_cloud (points, obj_path='/content/pointstest.obj'):
     verts.append(ico_v + p)
     faces.append(ico_f)
   write_objs(verts, faces, obj_path)
+
+
+def write_point_cloud_with_reference (points,
+                                      ref_verts, ref_faces,
+                                      obj_path='/content/pointstest.obj'):
+  ico_v, ico_f = read_obj('/content/Img2Mesh/models/ico.obj')
+  verts, faces = [], []
+  for p in points:
+    verts.append(ico_v + p)
+    faces.append(ico_f)
+  verts.append(ref_verts)
+  faces.append(ref_faces)
+  write_objs(verts, faces, obj_path)
