@@ -15,6 +15,7 @@ def write_objs (list_vertices, list_faces, obj_path='/content/objtest.obj'):
         file.write(vert + "\n")
           
       file.write("# FACES\n")
+      file.write("g obj" + str(i) + " group")
       for f in faces:
         face = "f %d %d %d" % (f[0], f[1] , f[2])
         file.write(face + "\n")
