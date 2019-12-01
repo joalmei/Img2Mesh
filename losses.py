@@ -14,7 +14,7 @@ def get_tensor_normals(vertices, faces, mask):
     v2 = tf.gather(vertices, faces[:,2] - 1)
     n_faces = tf.linalg.cross(v2 - v1, v0 - v1)
     n_vertex = tf.gather(n_faces, mask)             # list of face normals for each vertex
-    return K.mean(n_vertex)
+    return K.mean(n_vertex, axis=1)
 
 # ==============================================================================
 def normal_loss (ref_normals, targ_normals, closest_ref):
