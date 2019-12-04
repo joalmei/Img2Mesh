@@ -1,4 +1,4 @@
-from obj_tools import read_obj
+from tools.obj_tools import read_obj
 
 def write_objs (list_vertices, list_faces, obj_path='/content/objtest.obj'):
   with open(obj_path, 'w+') as file:
