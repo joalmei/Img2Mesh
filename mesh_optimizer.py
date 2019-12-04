@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from operator import itemgetter 
 from losses import complete_loss
-from optim_tools import shuffle_tensors
+from tools.optim_tools import shuffle_tensors
 
 
 class Optimizer:
@@ -72,12 +72,6 @@ class Optimizer:
                 if (checkpoint_callback != None):
                     checkpoint_callback(self.model)
             
-            # if (epoch % check_step == 0 and 
-            #     epoch > 1 and
-            #     ((train_loss_results[-check_step-1] - loss_value < minStep) or
-            #     loss_value < minError)):
-            #     print(int(train_loss_results[-check_step-1]) , ' - ', int(loss_value), ' < ', minStep)
-            #     return train_loss_results, True
             if (epoch % check_step == 0 and epoch > 1 and loss_value < minError):
                 print('minError achieved at ', float(loss_value))
                 return train_loss_results, True
@@ -103,8 +97,8 @@ class Optimizer:
                                                 minError=min_error,
                                                 minStep=min_step,
                                                 checkpoint_callback=checkpoint_callback)
-            if (repet > 1):
-                losses.extend(loss)
+            
+            losses.extend(loss)
             if (plot == True):
                 plt.plot(losses)
                 plt.plot(loss, label=str(repet))
