@@ -9,9 +9,12 @@ import tensorflow as tf
 import numpy      as np
 import time
 
-import mesh_optimizer as mopt
-
 # ==============================================================================
+# path  : list of paths of the .npy files
+# ratio : return only a ratio of the complete dataset
+# shape : 3D for Conv3D networks and 2D for Conv2D networks
+# lean  : True returns only the left render, False returns all
+# fetch_faces : return faces of the output models
 def prepareTrainData(path = ['./data/content/objnet/airplane/test'],
                         ratio=0, shape='3D', lean=True,
                         fetch_faces=False):
@@ -49,6 +52,9 @@ def prepareTrainData(path = ['./data/content/objnet/airplane/test'],
         return X, Y
 
 # ==============================================================================
+# model : classic (VGG-16)
+#         lean (silhouette recognition)
+#         otherwise (conv-deconv network)
 def prepareNN(model='classic', learning_rate=0.001, hidden_size=1024, out_verts=32):
     if (model == 'classic'):
         net = createNetwork(hidden_size, out_verts)
@@ -76,12 +82,12 @@ def runTraining(optim, X, Y,
     return losses
 
 # ==============================================================================
-def saveCheckpoint(path = './checkpoints/check', download_callback=None):
+def saveCheckpoint(path = './checkpoints/', download_callback=None):
     return lambda model : { saveModel(model, path),
                             download_callback(path) }
 
 def saveModel(model, path):
-    model.save_weights(path)
+    model.save_weights(path + 'checkpoint')
     
 # ==============================================================================
 def updateModel(model, checkpoint_path):

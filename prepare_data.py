@@ -2,9 +2,13 @@ import os
 import glob
 import numpy as np
 from random import sample
-from tools_3d import obj_normals
-from obj_tools import read_obj
+from tools.tools_3d import obj_normals
+from tools.obj_tools import read_obj
 
+# ==============================================================================
+# fetch .npy data (X: 6 images) (Y: vertices positions)
+#
+# fetch_faces == True = (faces: list of vertices for each face)
 def fetchData (path, lean=True, fetch_faces=False):
     X = []
     Y = []
@@ -30,16 +34,9 @@ def fetchData (path, lean=True, fetch_faces=False):
         return X, Y, faces
     return X, Y
 
+# ==============================================================================
+# returns all data from the .npy files in the path
 def prepareData (paths, lean=True, fetch_faces=False):
-    #X, Y = fetchData(path)
-    #for i in range(len(X)):
-    #    for j in range(len(X[i])):
-    #        idx = X[i][j] > 0
-    #        X[i][j][idx] = 1
-    
-    #for i in range(len(Y)):
-    #    Y[i] = (Y[i] + 1)/2
-
     X = []
     Y = []
     faces = []
@@ -57,6 +54,8 @@ def prepareData (paths, lean=True, fetch_faces=False):
         return X, Y, faces
     return X, Y
 
+# ==============================================================================
+# create slices for each batch in training
 def createBatches (length, batch_size=16):
     batches = []
 
@@ -69,6 +68,8 @@ def createBatches (length, batch_size=16):
 
     return batches
 
+# ==============================================================================
+# reduces the number of vertices in a model
 def downsample(data, k=50000, get_normals=False, faces=None):
     out = []    # vertices positions of output
     normals = []# vertex normals of output
@@ -106,11 +107,10 @@ def downsample(data, k=50000, get_normals=False, faces=None):
                 out.append(d)
         return out
 
-#  {'vertices': verts, 'faces': faces,
-#   'top': top, 'bottom': bottom,
-#   'front': front, 'back': back,
-#   'left': left, 'right': right};
 
+# ==============================================================================
+# prepares a mask of faces wich each vertice is part of
+# for normal_loss computing
 def prepare_mask(path='./models/ico_162.obj'):
     _, faces = read_obj(path)
     mask = []
