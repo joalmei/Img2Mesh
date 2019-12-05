@@ -3,9 +3,9 @@
 Developed for the Data Science courseware at University of São Paulo
 
 The project is separated in 3 notebooks:
-- Preprocessing
-- Trainning
-- Testing
+- Preprocessing (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Preprocessing.ipynb)
+- Trainning (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training.ipynb)
+- Testing (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Testing.ipynb)
 
 The notebooks are in the "notebooks" folder and are runnable with **Google Colaboratory**
 
@@ -49,3 +49,8 @@ and the **testing class**
 
 - The section **"Test with a custom 400x400 bmp"** shows an usage example for .bmp files.
 Note that it must have exactly 400x400.
+
+# Notes
+An alternative trainning notebook featuring a normal loss optimization for
+mesh fitting using faces normals is available (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training_(Normal_Loss).ipynb)
+The results from this technique were not satisfatory.
