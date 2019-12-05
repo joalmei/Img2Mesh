@@ -3,11 +3,11 @@
 Developed for the Data Science courseware at University of São Paulo
 
 The project is separated in 3 notebooks:
-- Preprocessing (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Preprocessing.ipynb)
-- Trainning (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training.ipynb)
-- Testing (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Testing.ipynb)
+- Preprocessing [[link](https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Preprocessing.ipynb)]
+- Trainning [[link](https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training.ipynb)]
+- Testing [[link](https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Testing.ipynb)]
 
-The notebooks are in the "notebooks" folder and are runnable with **Google Colaboratory**
+The notebooks are runnable with **Google Colaboratory**
 
 **ALL NOTEBOOKS SHOULD BE RUN WITH GPU ACCELERATION**
 and require **Google Drive** autorization
@@ -52,5 +52,7 @@ Note that it must have exactly 400x400.
 
 # Notes
 An alternative trainning notebook featuring a normal loss optimization for
-mesh fitting using faces normals is available (https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training_(Normal_Loss).ipynb)
+mesh fitting using faces normals is available [[link](https://github.com/jvaaguiar/Img2Mesh/blob/master/Img2Mesh_Training_(Normal_Loss).ipynb)]
 The results from this technique were not satisfatory.
+
+The presentation folder [[link](https://github.com/jvaaguiar/Img2Mesh/tree/master/presentation)] has the presentation further information about the solution design process.
